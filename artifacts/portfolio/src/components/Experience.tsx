@@ -12,13 +12,17 @@ const experiences = [
     role: "Senior Full-Stack Engineer",
     company: "Freelance / Consulting",
     type: "Contract",
-    impact: "Architected and shipped 6+ production applications for clients across fintech, logistics, and e-commerce. Reduced API latency by 60% through caching strategy overhauls.",
+    impact: "Architected and shipped 6+ production applications for clients across fintech, logistics, and e-commerce. Reduced API latency by 60% through caching strategy overhauls and intelligent query optimisation.",
     highlights: [
-      "Built real-time dashboards processing 50K+ events/day",
-      "Led migration from monolith to microservices for a logistics startup",
-      "Mentored 3 junior engineers across project delivery cycles",
+      "Built real-time dashboards processing 50K+ events/day with sub-100ms latency",
+      "Led migration from monolith to microservices for a logistics startup, reducing deploy risk by 70%",
+      "Mentored 3 junior engineers — all progressed to independent feature ownership within 3 months",
+      "Designed multi-tenant SaaS architecture with row-level security using PostgreSQL RLS policies",
+      "Integrated AI-powered search (OpenAI embeddings + pgvector) cutting support ticket volume by 35%",
+      "Delivered a fintech dashboard with real-time fraud detection flags, processing 2M+ daily transactions",
+      "Established testing culture: introduced Vitest + Playwright, achieving 80% coverage on critical paths",
     ],
-    stack: ["React", "Node.js", "TypeScript", "PostgreSQL", "Redis", "Docker"],
+    stack: ["React", "Node.js", "TypeScript", "PostgreSQL", "Redis", "Docker", "OpenAI"],
     color: "#ff6600",
   },
   {
@@ -27,13 +31,18 @@ const experiences = [
     role: "Full-Stack Developer",
     company: "Remote Product Studio",
     type: "Full-time",
-    impact: "Owned the entire frontend codebase for a SaaS platform serving 3,000+ daily active users. Shipped the mobile app (React Native) in 10 weeks from zero.",
+    impact: "Owned the entire frontend codebase for a SaaS platform serving 3,000+ daily active users. Shipped the mobile app (React Native) in 10 weeks from zero to both app stores.",
     highlights: [
-      "Rebuilt authentication system reducing login failures by 85%",
-      "Shipped React Native app — App Store & Google Play in 10 weeks",
-      "Implemented CI/CD pipelines cutting deployment time from 45min to 8min",
+      "Rebuilt authentication system using PKCE OAuth flow — reduced login failures by 85%",
+      "Shipped React Native app to App Store & Google Play in under 10 weeks, solo",
+      "Implemented GitHub Actions CI/CD pipelines cutting deployment time from 45min to 8min",
+      "Refactored data fetching layer to React Query — eliminated 60% of redundant API calls",
+      "Built internal admin dashboard used by 12+ team members for daily ops and analytics",
+      "Reduced bundle size by 42% via code splitting, lazy loading, and tree shaking audit",
+      "Led weekly design-engineering syncs, translating Figma specs to pixel-perfect implementations",
+      "Wrote comprehensive API documentation with Swagger, onboarding 3 third-party integrators",
     ],
-    stack: ["React", "React Native", "GraphQL", "Node.js", "MongoDB", "AWS"],
+    stack: ["React", "React Native", "GraphQL", "Node.js", "MongoDB", "AWS", "GitHub Actions"],
     color: "#ff6600",
   },
   {
@@ -42,13 +51,17 @@ const experiences = [
     role: "Frontend Engineer",
     company: "Startup (Seed Stage)",
     type: "Full-time",
-    impact: "Core engineer on a B2B payments platform. Designed and built the core dashboard from scratch, achieving a 92% satisfaction score in user testing.",
+    impact: "Core engineer on a B2B payments platform. Designed and built the core dashboard from scratch, achieving a 92% satisfaction score in user testing sessions with finance teams.",
     highlights: [
-      "Built component library used across 4 product surfaces",
-      "Optimized Web Vitals — LCP from 4.2s to 1.1s",
-      "Integrated 3 payment processors (Stripe, Paystack, Flutterwave)",
+      "Built reusable component library (40+ components) used across 4 product surfaces",
+      "Optimised Core Web Vitals — LCP from 4.2s to 1.1s, CLS from 0.3 to 0.01",
+      "Integrated 3 payment processors: Stripe, Paystack, and Flutterwave with unified abstraction layer",
+      "Introduced TypeScript to the codebase, eliminating an entire class of runtime bugs",
+      "Built automated invoice generation and PDF export feature, saving ops team 6hr/week",
+      "Collaborated with 2 product designers in Figma to establish design tokens and spacing system",
+      "Implemented end-to-end encryption for sensitive financial data fields in the frontend",
     ],
-    stack: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Stripe"],
+    stack: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Stripe", "Paystack", "Figma"],
     color: "#ff6600",
   },
   {
@@ -57,13 +70,17 @@ const experiences = [
     role: "Junior Developer",
     company: "Digital Agency",
     type: "Full-time",
-    impact: "First professional role. Shipped 12 client websites and learned the value of clean code, client communication, and delivering under pressure.",
+    impact: "First professional role. Shipped 12 client websites and learned the value of clean code, client communication, fast iteration, and delivering high-quality work under tight deadlines.",
     highlights: [
-      "Built 12 production websites across diverse industries",
-      "Introduced React to a previously vanilla JS codebase",
-      "Reduced page load time by 40% on flagship client project",
+      "Shipped 12 production websites across diverse industries: healthcare, retail, and real estate",
+      "Introduced React to a previously vanilla JS codebase, reducing UI bug reports by 50%",
+      "Reduced page load time by 40% on flagship client project through image optimisation and lazy loading",
+      "Built a custom WordPress theme from scratch for a client with 50K+ monthly visitors",
+      "Wrote SQL queries and built admin interfaces for internal tools used by 20+ staff members",
+      "Maintained direct client relationships, conducting weekly demos and gathering feedback",
+      "Created reusable CSS animation library adopted across 8 agency projects",
     ],
-    stack: ["JavaScript", "React", "CSS", "PHP", "MySQL", "WordPress"],
+    stack: ["JavaScript", "React", "CSS", "PHP", "MySQL", "WordPress", "jQuery"],
     color: "#ff6600",
   },
 ];
@@ -76,17 +93,20 @@ export default function Experience() {
 
   useEffect(() => {
     const panels = document.querySelectorAll(".exp-panel");
+    const triggers: ReturnType<typeof ScrollTrigger.create>[] = [];
+
     panels.forEach((panel, i) => {
-      ScrollTrigger.create({
+      const trigger = ScrollTrigger.create({
         trigger: panel,
         start: "top center",
         end: "bottom center",
         onEnter: () => setActiveIndex(i),
         onEnterBack: () => setActiveIndex(i),
       });
+      triggers.push(trigger);
     });
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    return () => triggers.forEach((t) => t.kill());
   }, []);
 
   const active = experiences[activeIndex];
@@ -113,16 +133,16 @@ export default function Experience() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 items-start">
-          <div
-            ref={stickyRef}
-            className="hidden lg:block sticky top-32"
-          >
+          {/* Sticky sidebar */}
+          <div ref={stickyRef} className="hidden lg:block sticky top-32">
             <div className="space-y-1">
               {experiences.map((exp, i) => (
                 <motion.button
                   key={exp.year}
                   onClick={() => {
-                    document.querySelector(`.exp-panel-${i}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+                    document
+                      .querySelector(`.exp-panel-${i}`)
+                      ?.scrollIntoView({ behavior: "smooth", block: "center" });
                   }}
                   className="w-full text-left group"
                   whileHover={{ x: 4 }}
@@ -137,7 +157,9 @@ export default function Experience() {
                   >
                     <span
                       className={`text-2xl font-bold font-mono transition-colors duration-300 ${
-                        activeIndex === i ? "text-[#ff6600]" : "text-foreground/20 group-hover:text-foreground/40"
+                        activeIndex === i
+                          ? "text-[#ff6600]"
+                          : "text-foreground/20 group-hover:text-foreground/40"
                       }`}
                     >
                       {exp.year}
@@ -150,7 +172,11 @@ export default function Experience() {
                       >
                         {exp.role}
                       </div>
-                      <div className={`text-xs transition-colors duration-300 ${activeIndex === i ? "text-[#ff6600]/70" : "text-foreground/20"}`}>
+                      <div
+                        className={`text-xs transition-colors duration-300 ${
+                          activeIndex === i ? "text-[#ff6600]/70" : "text-foreground/20"
+                        }`}
+                      >
                         {exp.type}
                       </div>
                     </div>
@@ -167,7 +193,7 @@ export default function Experience() {
               className="mt-10 p-5 border border-white/8 rounded-sm"
             >
               <div className="text-xs font-semibold tracking-wider text-foreground/30 uppercase mb-3">
-                Stack
+                Stack used
               </div>
               <div className="flex flex-wrap gap-2">
                 {active.stack.map((tech) => (
@@ -180,8 +206,15 @@ export default function Experience() {
                 ))}
               </div>
             </motion.div>
+
+            <div className="mt-6 p-5 border border-white/5 rounded-sm">
+              <div className="text-xs text-foreground/20 font-mono leading-relaxed">
+                {experiences[activeIndex].highlights.length} key achievements in this role
+              </div>
+            </div>
           </div>
 
+          {/* Scrollable content */}
           <div className="space-y-0">
             {experiences.map((exp, i) => (
               <div
@@ -194,6 +227,7 @@ export default function Experience() {
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
                 >
+                  {/* Header */}
                   <div className="flex items-start justify-between gap-4 mb-6">
                     <div>
                       <div className="text-xs font-mono text-[#ff6600] mb-2 tracking-wider">
@@ -215,26 +249,29 @@ export default function Experience() {
                     </div>
                   </div>
 
-                  <p className="text-foreground/60 leading-relaxed mb-6 text-sm md:text-base">
+                  {/* Impact summary */}
+                  <p className="text-foreground/60 leading-relaxed mb-8 text-sm md:text-base border-l-2 border-[#ff6600]/30 pl-4">
                     {exp.impact}
                   </p>
 
-                  <div className="space-y-2 mb-6">
+                  {/* Highlights — two columns on wider screens */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 mb-8">
                     {exp.highlights.map((h, j) => (
                       <motion.div
                         key={j}
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: -16 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: j * 0.1 + 0.2, duration: 0.5 }}
+                        transition={{ delay: j * 0.07 + 0.15, duration: 0.45 }}
                         className="flex items-start gap-3"
                       >
-                        <div className="w-1 h-1 rounded-full bg-[#ff6600] mt-2 shrink-0" />
-                        <span className="text-sm text-foreground/55">{h}</span>
+                        <div className="w-1 h-1 rounded-full bg-[#ff6600] mt-[7px] shrink-0" />
+                        <span className="text-sm text-foreground/55 leading-relaxed">{h}</span>
                       </motion.div>
                     ))}
                   </div>
 
+                  {/* Stack — mobile only (desktop uses sticky sidebar) */}
                   <div className="flex flex-wrap gap-2 lg:hidden">
                     {exp.stack.map((tech) => (
                       <span

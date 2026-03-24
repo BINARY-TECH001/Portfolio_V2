@@ -80,6 +80,7 @@ export default function Loader({ onComplete }: LoaderProps) {
 
   const name = "Abdulrafiu Mubarak Ishola";
   const words = name.split(" ");
+  const currentYear = new Date().getFullYear();
 
   return (
     <div
@@ -95,7 +96,7 @@ export default function Loader({ onComplete }: LoaderProps) {
         />
         <div
           ref={nameRef}
-          className="flex flex-wrap justify-center gap-x-4 gap-y-1 perspective-[600px]"
+          className="flex flex-wrap justify-center gap-x-4 gap-y-1"
           style={{ perspective: "600px" }}
         >
           {words.map((word, wi) => (
@@ -109,13 +110,6 @@ export default function Loader({ onComplete }: LoaderProps) {
                   {char}
                 </span>
               ))}
-              {wi < words.length - 1 && (
-                <span
-                  className="loader-char inline-block text-3xl md:text-5xl font-bold text-[#ff6600] ml-1"
-                >
-                  {" "}
-                </span>
-              )}
             </div>
           ))}
         </div>
@@ -131,7 +125,7 @@ export default function Loader({ onComplete }: LoaderProps) {
             className="loader-char text-xs font-mono tracking-[0.3em] uppercase"
             style={{ color: "rgba(255,255,255,0.3)" }}
           >
-            2025
+            {currentYear}
           </span>
         </div>
       </div>
