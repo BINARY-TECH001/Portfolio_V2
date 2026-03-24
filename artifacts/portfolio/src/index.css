@@ -65,14 +65,14 @@
   --elevate-1: rgba(0,0,0,.03);
   --elevate-2: rgba(0,0,0,.08);
 
-  /* #14213d → navy */
-  --background: 216 50% 13%;
-  --foreground: 210 40% 96%;
-  --border: 216 30% 22%;
-  --card: 216 45% 17%;
-  --card-foreground: 210 40% 96%;
-  --card-border: 216 30% 24%;
-  --sidebar: 216 50% 10%;
+  /* #0c1627 → deep navy */
+  --background: 216 54% 10%;
+  --foreground: 210 40% 92%;
+  --border: 216 30% 18%;
+  --card: 216 45% 12%;
+  --card-foreground: 210 40% 92%;
+  --card-border: 216 30% 18%;
+  --sidebar: 216 54% 7%;
   --sidebar-foreground: 210 40% 96%;
   --sidebar-border: 216 30% 18%;
   --sidebar-primary: 24 100% 50%;

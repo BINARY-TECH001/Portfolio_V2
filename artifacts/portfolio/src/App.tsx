@@ -2,9 +2,12 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { useState, useCallback } from "react";
 import Navigation from "@/components/Navigation";
+import Loader from "@/components/Loader";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import TechStack from "@/components/TechStack";
 import GitHub from "@/components/GitHub";
@@ -20,17 +23,27 @@ const queryClient = new QueryClient({
 });
 
 function Portfolio() {
+  const [loaded, setLoaded] = useState(false);
+
+  const handleLoaderComplete = useCallback(() => {
+    setLoaded(true);
+  }, []);
+
   return (
-    <div className="relative bg-[#14213d] min-h-screen">
-      <Navigation />
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <TechStack />
-        <GitHub />
-        <Contact />
-      </main>
+    <div className="relative min-h-screen" style={{ backgroundColor: "#0c1627" }}>
+      {!loaded && <Loader onComplete={handleLoaderComplete} />}
+      <div style={{ visibility: loaded ? "visible" : "hidden" }}>
+        <Navigation />
+        <main>
+          <Hero />
+          <About />
+          <Experience />
+          <Projects />
+          <TechStack />
+          <GitHub />
+          <Contact />
+        </main>
+      </div>
     </div>
   );
 }
