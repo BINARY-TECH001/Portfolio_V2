@@ -194,10 +194,10 @@ export default function Contact() {
                               ? "#ff6600"
                               : errors[id as keyof typeof errors]
                               ? "#ef4444"
-                              : "rgba(255,255,255,0.08)",
+                              : "hsl(var(--border))",
                         }}
                         transition={{ duration: 0.2 }}
-                        className="border rounded-sm"
+                        className="border overflow-hidden rounded-sm"
                       >
                           <input
                             id={id}
@@ -230,10 +230,10 @@ export default function Contact() {
                           ? "#ff6600"
                           : errors.message
                           ? "#ef4444"
-                          : "rgba(255,255,255,0.08)",
+                          : "hsl(var(--border))",
                     }}
                     transition={{ duration: 0.2 }}
-                    className="border rounded-sm"
+                    className="border overflow-hidden rounded-sm"
                   >
                     <textarea
                       id="message"
@@ -263,7 +263,7 @@ export default function Contact() {
                       <motion.div
                         animate={{ rotate: 360 }}
                         transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                        className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                        className="w-4 h-4 border-2 border-foreground/30 border-t-foreground rounded-full"
                       />
                       Sending...
                     </>
@@ -287,8 +287,8 @@ export default function Contact() {
                 { label: "Location", value: "Nigeria · GMT+1", href: null },
                 { label: "Response", value: "Within 24 hours", href: null },
               ].map(({ label, value, href }) => (
-                <div key={label} className="border-b border-white/5 pb-5">
-                  <div className="text-xs font-semibold tracking-wider text-foreground/25 uppercase mb-1">
+                <div key={label} className="border-b border-border/40 pb-5">
+                  <div className="text-xs font-semibold tracking-wider text-foreground/50 uppercase mb-1">
                     {label}
                   </div>
                   {href ? (
@@ -316,7 +316,7 @@ export default function Contact() {
                     data-testid={`link-social-footer-${label.toLowerCase()}`}
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 border border-white/10 flex items-center justify-center text-foreground/40 hover:text-[#ff6600] hover:border-[#ff6600]/30 transition-all rounded-sm"
+                    className="w-10 h-10 border border-border/40 flex items-center justify-center text-foreground/60 hover:text-[#ff6600] hover:border-[#ff6600]/30 transition-all rounded-sm"
                     aria-label={label}
                   >
                     <Icon size={16} />
@@ -338,7 +338,7 @@ export default function Contact() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.8, duration: 0.6 }}
-          className="mt-24 pt-10 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4"
+          className="mt-24 pt-10 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-4"
         >
           <div>
             <p className="text-xs text-foreground/25 font-mono">

@@ -17,12 +17,12 @@ interface Tech {
 const technologies: Tech[] = [
   { name: "React", icon: SiReact, category: "Frontend", color: "#61dafb" },
   { name: "TypeScript", icon: SiTypescript, category: "Frontend", color: "#3178c6" },
-  { name: "Next.js", icon: SiNextdotjs, category: "Frontend", color: "#ffffff" },
+  { name: "Next.js", icon: SiNextdotjs, category: "Frontend", color: "#888888" },
   { name: "Tailwind CSS", icon: SiTailwindcss, category: "Frontend", color: "#06b6d4" },
   { name: "Framer Motion", icon: SiFramer, category: "Frontend", color: "#ff6600" },
   { name: "Vite", icon: SiVite, category: "Frontend", color: "#646cff" },
   { name: "Node.js", icon: SiNodedotjs, category: "Backend", color: "#68a063" },
-  { name: "Express", icon: SiExpress, category: "Backend", color: "#ffffff" },
+  { name: "Express", icon: SiExpress, category: "Backend", color: "#888888" },
   { name: "PostgreSQL", icon: SiPostgresql, category: "Backend", color: "#336791" },
   { name: "MongoDB", icon: SiMongodb, category: "Backend", color: "#47a248" },
   { name: "Redis", icon: SiRedis, category: "Backend", color: "#d82c20" },
@@ -31,7 +31,7 @@ const technologies: Tech[] = [
   { name: "Firebase", icon: SiFirebase, category: "Tools", color: "#ffca28" },
   { name: "Docker", icon: SiDocker, category: "Tools", color: "#2496ed" },
   { name: "Git", icon: SiGit, category: "Tools", color: "#f05032" },
-  { name: "GitHub", icon: SiGithub, category: "Tools", color: "#ffffff" },
+  { name: "GitHub", icon: SiGithub, category: "Tools", color: "#888888" },
   { name: "Linux", icon: SiLinux, category: "Tools", color: "#fcc624" },
 ];
 
@@ -52,7 +52,7 @@ function TechIcon({ tech }: { tech: Tech }) {
         whileTap={{ scale: 0.95 }}
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
         data-testid={`icon-tech-${tech.name.toLowerCase().replace(/\s+/g, "-")}`}
-        className="w-12 h-12 flex items-center justify-center border border-white/8 rounded-sm cursor-default"
+        className="w-12 h-12 flex items-center justify-center border border-border/40 rounded-sm cursor-default"
         style={{
           background: hovered ? `${tech.color}12` : "transparent",
           borderColor: hovered ? `${tech.color}40` : undefined,
@@ -61,7 +61,7 @@ function TechIcon({ tech }: { tech: Tech }) {
       >
         <Icon
           size={22}
-          style={{ color: hovered ? tech.color : "rgba(255,255,255,0.4)", transition: "color 0.2s" }}
+          style={{ color: hovered ? tech.color : "hsl(var(--foreground) / 0.4)", transition: "color 0.2s" }}
         />
       </motion.div>
 
@@ -113,10 +113,10 @@ export default function TechStack() {
                 transition={{ duration: 0.6, delay: catIndex * 0.15 }}
               >
                 <div className="flex items-center gap-4 mb-10">
-                  <span className="text-xs font-semibold tracking-[0.2em] uppercase text-foreground/30">
+                  <span className="text-xs font-semibold tracking-[0.2em] uppercase text-foreground/50">
                     {category}
                   </span>
-                  <div className="flex-1 h-px bg-white/5" />
+                  <div className="flex-1 h-px bg-border/40" />
                 </div>
 
                 <div className="flex flex-wrap gap-8 pl-2">

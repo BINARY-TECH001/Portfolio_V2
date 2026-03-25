@@ -63,7 +63,7 @@ const langColors: Record<string, string> = {
 
 /* Contribution graph level → color */
 const CONTRIB_LEVELS: Record<number, string> = {
-  0: "rgba(255,255,255,0.04)",
+  0: "rgba(150,150,150,0.1)",
   1: "rgba(255,102,0,0.18)",
   2: "rgba(255,102,0,0.38)",
   3: "rgba(255,102,0,0.65)",
@@ -273,7 +273,7 @@ export default function GitHub() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.05 }}
-          className="border border-white/8 rounded-sm p-6 mb-5"
+          className="border border-border/40 rounded-sm p-6 mb-5"
         >
           <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
@@ -307,7 +307,7 @@ export default function GitHub() {
               {[...Array(7)].map((_, i) => (
                 <div key={i} className="flex gap-1 flex-1">
                   {[...Array(52)].map((_, j) => (
-                    <div key={j} className="flex-1 rounded-[2px]" style={{ backgroundColor: "rgba(255,255,255,0.04)" }} />
+                    <div key={j} className="flex-1 rounded-[2px]" style={{ backgroundColor: "rgba(150,150,150,0.1)" }} />
                   ))}
                 </div>
               ))}
@@ -331,7 +331,7 @@ export default function GitHub() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="border border-white/8 rounded-sm p-6 flex flex-col gap-6"
+            className="border border-border/40 rounded-sm p-6 flex flex-col gap-6"
           >
             {/* Avatar + name */}
             <div className="flex items-center gap-3">
@@ -339,16 +339,16 @@ export default function GitHub() {
                 <img
                   src={user.avatar_url}
                   alt={user.name || GITHUB_USERNAME}
-                  className="w-10 h-10 rounded-sm border border-white/10 object-cover"
+                  className="w-10 h-10 rounded-sm border border-border/40 object-cover"
                 />
               ) : (
-                <div className="w-10 h-10 border border-white/10 rounded-sm flex items-center justify-center">
+                <div className="w-10 h-10 border border-border/40 rounded-sm flex items-center justify-center">
                   <FaGithub size={16} className="text-foreground/50" />
                 </div>
               )}
               <div>
                 {userLoading ? (
-                  <div className="h-3.5 w-28 bg-white/5 rounded animate-pulse" />
+                  <div className="h-3.5 w-28 bg-foreground/10 rounded animate-pulse" />
                 ) : (
                   <div className="text-sm font-semibold text-foreground">{user?.name || GITHUB_USERNAME}</div>
                 )}
@@ -368,7 +368,7 @@ export default function GitHub() {
               ].map(({ icon: Icon, label, value }) => (
                 <div
                   key={label}
-                  className="border border-white/6 rounded-sm p-3"
+                  className="border border-border/40 rounded-sm p-3"
                   data-testid={`stat-github-${label.toLowerCase()}`}
                 >
                   <div className="flex items-center gap-1.5 mb-1.5">
@@ -431,7 +431,7 @@ export default function GitHub() {
                       rel="noopener noreferrer"
                       title={org.description || org.login}
                       data-testid={`link-org-${org.login}`}
-                      className="group flex items-center gap-2 border border-white/8 rounded-sm px-2.5 py-1.5 hover:border-[#ff6600]/30 transition-colors"
+                      className="group flex items-center gap-2 border border-border/40 rounded-sm px-2.5 py-1.5 hover:border-[#ff6600]/30 transition-colors"
                     >
                       <img
                         src={org.avatar_url}
@@ -457,7 +457,7 @@ export default function GitHub() {
               target="_blank"
               rel="noopener noreferrer"
               data-testid="link-github-profile"
-              className="flex items-center gap-2 text-xs text-[#ff6600]/60 hover:text-[#ff6600] transition-colors border-t border-white/5 pt-4"
+              className="flex items-center gap-2 text-xs text-[#ff6600]/60 hover:text-[#ff6600] transition-colors border-t border-border/40 pt-4"
             >
               <FaGithub size={12} />
               View full profile
@@ -470,7 +470,7 @@ export default function GitHub() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="lg:col-span-2 border border-white/8 rounded-sm p-6"
+            className="lg:col-span-2 border border-border/40 rounded-sm p-6"
           >
             <div className="flex items-center gap-2 mb-6">
               <Star size={13} className="text-[#ff6600]" />
@@ -482,10 +482,10 @@ export default function GitHub() {
             {reposLoading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="border border-white/5 rounded-sm p-4 animate-pulse">
-                    <div className="h-3 w-1/2 bg-white/5 rounded mb-2" />
-                    <div className="h-2 w-full bg-white/5 rounded mb-1" />
-                    <div className="h-2 w-3/4 bg-white/5 rounded" />
+                  <div key={i} className="border border-border/40 rounded-sm p-4 animate-pulse">
+                    <div className="h-3 w-1/2 bg-foreground/10 rounded mb-2" />
+                    <div className="h-2 w-full bg-foreground/10 rounded mb-1" />
+                    <div className="h-2 w-3/4 bg-foreground/10 rounded" />
                   </div>
                 ))}
               </div>
@@ -512,11 +512,11 @@ export default function GitHub() {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.3 + idx * 0.07, duration: 0.45 }}
                     whileHover={{ y: -2, transition: { duration: 0.15 } }}
-                    className="group border border-white/8 rounded-sm p-4 hover:border-[#ff6600]/25 transition-all duration-200 flex flex-col justify-between gap-3"
+                    className="group border border-border/40 rounded-sm p-4 hover:border-[#ff6600]/25 transition-all duration-200 flex flex-col justify-between gap-3"
                   >
                     <div>
                       <div className="flex items-start justify-between gap-2 mb-2">
-                        <span className="text-sm font-semibold text-foreground group-hover:text-white transition-colors truncate">
+                        <span className="text-sm font-semibold text-foreground transition-colors truncate">
                           {repo.name}
                         </span>
                         {repo.language && (

@@ -85,8 +85,7 @@ export default function Loader({ onComplete }: LoaderProps) {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center"
-      style={{ backgroundColor: "#0a1628" }}
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
     >
       <div className="flex flex-col items-center gap-6">
         <div
@@ -104,7 +103,7 @@ export default function Loader({ onComplete }: LoaderProps) {
               {word.split("").map((char, ci) => (
                 <span
                   key={ci}
-                  className="loader-char inline-block text-3xl md:text-5xl font-bold tracking-tight text-white"
+                  className="loader-char inline-block text-3xl md:text-5xl font-bold tracking-tight text-foreground"
                   style={{ fontFamily: "'Poppins', sans-serif" }}
                 >
                   {char}
@@ -115,15 +114,13 @@ export default function Loader({ onComplete }: LoaderProps) {
         </div>
         <div className="flex items-center gap-2">
           <span
-            className="loader-char text-xs font-mono tracking-[0.3em] uppercase"
-            style={{ color: "rgba(255,255,255,0.3)" }}
+            className="loader-char text-xs font-mono tracking-[0.3em] uppercase opacity-30 text-foreground"
           >
             Portfolio
           </span>
           <span className="loader-char text-[#ff6600] text-xs">·</span>
           <span
-            className="loader-char text-xs font-mono tracking-[0.3em] uppercase"
-            style={{ color: "rgba(255,255,255,0.3)" }}
+            className="loader-char text-xs font-mono tracking-[0.3em] uppercase opacity-30 text-foreground"
           >
             {currentYear}
           </span>

@@ -61,7 +61,7 @@ export default function About() {
             {/* Image 1 — tall portrait, offset right */}
             <motion.div
               style={{ y: imgY1 }}
-              className="relative self-end w-[75%] aspect-[4/5] rounded-sm overflow-hidden border border-white/8"
+              className="relative self-end w-[75%] aspect-[4/5] rounded-sm overflow-hidden border border-border/40"
             >
               {/* Placeholder photo area — replace src attr with real photo */}
               <img
@@ -74,8 +74,7 @@ export default function About() {
               <div className="absolute left-0 top-8 bottom-8 w-0.5 bg-[#ff6600]/40" />
 
               {/* Floating badge */}
-              <div className="absolute bottom-5 left-5 border border-white/10 rounded-sm px-3 py-2"
-                style={{ background: "rgba(12,22,39,0.85)", backdropFilter: "blur(12px)" }}>
+              <div className="absolute bottom-5 left-5 border border-border/40 rounded-sm px-3 py-2 bg-background/80 backdrop-blur-md">
                 <div className="text-xs font-mono text-[#ff6600]">Full-Stack Engineer</div>
                 <div className="text-xs text-foreground/30 mt-0.5">Ibadan, Nigeria · GMT+1</div>
               </div>
@@ -84,7 +83,7 @@ export default function About() {
             {/* Image 2 — shorter landscape, offset left */}
             <motion.div
               style={{ y: imgY2 }}
-              className="relative self-start w-[65%] aspect-[4/3] rounded-sm overflow-hidden border border-white/8 -mt-8"
+              className="relative self-start w-[65%] aspect-[4/3] rounded-sm overflow-hidden border border-border/40 -mt-8"
             >
               <img
                 src="/assets/binary5.JPG"
@@ -93,7 +92,7 @@ export default function About() {
               />
 
               {/* Year badge */}
-              <div className="absolute top-4 right-4 text-3xl font-bold font-mono text-white/5 select-none leading-none">
+              <div className="absolute top-4 right-4 text-3xl font-bold font-mono opacity-20 text-foreground mix-blend-difference select-none leading-none">
                 '24
               </div>
             </motion.div>
@@ -142,7 +141,7 @@ export default function About() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.3 + i * 0.08, duration: 0.5 }}
-                  className="border border-white/8 p-4 rounded-sm text-center"
+                  className="border border-border/40 p-4 rounded-sm text-center"
                 >
                   <div className="text-2xl font-bold font-mono text-[#ff6600] mb-1">{v}</div>
                   <div className="text-xs text-foreground/35 font-medium tracking-wide">{l}</div>
@@ -151,7 +150,7 @@ export default function About() {
             </div>
 
             {/* Availability */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 border border-white/8 rounded-sm p-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 border border-border/40 rounded-sm p-4">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
                 <span className="text-xs font-mono text-foreground/45">
@@ -168,7 +167,7 @@ export default function About() {
                 >
                   <Download size={13} /> Download CV
                 </a>
-                <span className="w-px h-3 bg-white/10 hidden sm:block" />
+                <span className="w-px h-3 bg-border/40 hidden sm:block" />
                 <a
                   href="#contact"
                   onClick={(e) => {
@@ -193,7 +192,7 @@ export default function About() {
                   <motion.span
                     key={tag}
                     whileHover={{ borderColor: "rgba(255,102,0,0.5)", color: "rgba(255,102,0,0.8)" }}
-                    className="text-xs font-medium px-3 py-1.5 border border-white/8 text-foreground/40 rounded-sm tracking-wide cursor-default transition-colors duration-200"
+                    className="text-xs font-medium px-3 py-1.5 border border-border/40 text-foreground/40 rounded-sm tracking-wide cursor-default transition-colors duration-200"
                   >
                     {tag}
                   </motion.span>
@@ -203,10 +202,10 @@ export default function About() {
 
             {/* Mobile image row (only visible on small screens) */}
             <div className="flex gap-4 lg:hidden">
-              <div className="flex-1 aspect-[4/5] rounded-sm overflow-hidden border border-white/8">
+              <div className="flex-1 aspect-[4/5] rounded-sm overflow-hidden border border-border/40">
                 <img src="/assets/me1.JPG" className="w-full h-full object-cover grayscale" />
               </div>
-              <div className="w-1/3 aspect-[3/4] rounded-sm overflow-hidden border border-white/8 self-end">
+              <div className="w-1/3 aspect-[3/4] rounded-sm overflow-hidden border border-border/40 self-end">
                 <img src="/assets/binary2.JPG" className="w-full h-full object-cover grayscale" />
               </div>
             </div>

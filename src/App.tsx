@@ -13,6 +13,7 @@ import TechStack from "@/components/TechStack";
 import GitHub from "@/components/GitHub";
 import Contact from "@/components/Contact";
 import ProjectDetail from "@/pages/ProjectDetail";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,7 +32,7 @@ function Portfolio() {
   }, []);
 
   return (
-    <div className="relative min-h-screen" style={{ backgroundColor: "#0c1627" }}>
+    <div className="relative min-h-screen bg-background text-foreground transition-colors duration-300">
       {!loaded && <Loader onComplete={handleLoaderComplete} />}
       <div style={{ visibility: loaded ? "visible" : "hidden" }}>
         <Navigation />
@@ -61,14 +62,16 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+          </WouterRouter>
+          <Toaster />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 

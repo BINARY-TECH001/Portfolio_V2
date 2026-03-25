@@ -281,7 +281,7 @@ export default function Experience() {
                     className={`flex items-center gap-4 py-3 px-4 rounded-sm transition-all duration-300 ${
                       activeIndex === i
                         ? "bg-[#ff6600]/10 border-l-2 border-[#ff6600]"
-                        : "border-l-2 border-transparent hover:border-white/20"
+                        : "border-l-2 border-transparent hover:border-border/60"
                     }`}
                   >
                     <span
@@ -319,7 +319,7 @@ export default function Experience() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="mt-10 p-5 border border-white/8 rounded-sm"
+              className="mt-10 p-5 border border-border/40 rounded-sm"
             >
               <div className="text-xs font-semibold tracking-wider text-foreground/30 uppercase mb-3">
                 Stack used
@@ -328,7 +328,7 @@ export default function Experience() {
                 {active.stack.map((tech) => (
                   <span
                     key={tech}
-                    className="text-xs font-mono px-2 py-1 border border-white/10 text-foreground/50 rounded-sm"
+                    className="text-xs font-mono px-2 py-1 border border-border/40 text-foreground/50 rounded-sm"
                   >
                     {tech}
                   </span>
@@ -336,7 +336,7 @@ export default function Experience() {
               </div>
             </motion.div>
 
-            <div className="mt-6 p-5 border border-white/5 rounded-sm">
+            <div className="mt-6 p-5 border border-border/40 rounded-sm">
               <div className="text-xs text-foreground/20 font-mono leading-relaxed">
                 {experiences[activeIndex].highlights.length} key achievements in this role
               </div>
@@ -348,7 +348,7 @@ export default function Experience() {
             {experiences.map((exp, i) => (
               <div
                 key={exp.year}
-                className={`exp-panel exp-panel-${i} py-16 border-b border-white/5 last:border-0`}
+                className={`exp-panel exp-panel-${i} py-16 border-b border-border/40 last:border-0`}
               >
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
@@ -368,7 +368,7 @@ export default function Experience() {
                       <div className="flex items-center gap-2">
                         <span className="text-foreground/50 text-sm">{exp.company}</span>
                         <span className="text-foreground/20 text-xs">·</span>
-                        <span className="text-xs font-medium px-2 py-0.5 border border-white/10 text-foreground/40 rounded-sm">
+                        <span className="text-xs font-medium px-2 py-0.5 border border-border/40 text-foreground/40 rounded-sm">
                           {exp.type}
                         </span>
                       </div>
@@ -405,7 +405,7 @@ export default function Experience() {
                     {exp.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs font-mono px-2 py-1 border border-white/10 text-foreground/40 rounded-sm"
+                        className="text-xs font-mono px-2 py-1 border border-border/40 text-foreground/40 rounded-sm"
                       >
                         {tech}
                       </span>

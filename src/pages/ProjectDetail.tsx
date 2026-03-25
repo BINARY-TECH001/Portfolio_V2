@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { ArrowLeft, ExternalLink, ArrowRight, Send } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
+import emailjs from "@emailjs/browser";
+import { toast } from "sonner";
 import { projects, stackColors } from "@/data/projects";
 
 function MiniContactForm({ projectTitle }: { projectTitle: string }) {
@@ -14,11 +16,28 @@ function MiniContactForm({ projectTitle }: { projectTitle: string }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email) return;
+    if (!form.name || !form.email || !form.message) return;
     setSending(true);
-    await new Promise((r) => setTimeout(r, 1400));
-    setSending(false);
-    setSent(true);
+    try {
+      await emailjs.send(
+        "service_p502n5q",
+        "template_jid26yo",
+        {
+          title: "Portfolio Contact (Project Inquiry)",
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        },
+        "Cwl_ctWeYj4U7KcGz"
+      );
+      toast.success("Detailed inquiry sent successfully!");
+      setSent(true);
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   if (sent) {
@@ -150,7 +169,7 @@ function ProjectImage({
 
   return (
     <div
-      className={`relative rounded-sm overflow-hidden border border-white/8 bg-[#0c1627] flex items-center justify-center p-4 lg:p-12 ${className}`}
+      className={`relative rounded-sm overflow-hidden border border-foreground/10 bg-background flex items-center justify-center p-4 lg:p-12 ${className}`}
       style={{ aspectRatio: aspect }}
     >
       <img
@@ -191,7 +210,7 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4" style={{ backgroundColor: "#0c1627" }}>
+      <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-background">
         <p className="text-foreground/40 font-mono text-sm">Project not found</p>
         <button
           onClick={() => navigate("/")}
@@ -211,13 +230,11 @@ export default function ProjectDetail() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.4 }}
-        className="min-h-screen"
-        style={{ backgroundColor: "#0c1627" }}
+        className="min-h-screen bg-background"
       >
         {/* ── Sticky top bar ── */}
         <div
-          className="sticky top-0 z-50 border-b border-white/5 backdrop-blur-xl px-6 md:px-12 lg:px-24 py-4 flex items-center justify-between"
-          style={{ backgroundColor: "rgba(12,22,39,0.9)" }}
+          className="sticky top-0 z-50 border-b border-border/40 backdrop-blur-xl px-6 md:px-12 lg:px-24 py-4 flex items-center justify-between bg-background/90"
         >
           <button
             onClick={() => navigate("/")}

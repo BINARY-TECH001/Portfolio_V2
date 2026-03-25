@@ -269,7 +269,7 @@ export const projects: FullProject[] = [
 
 export const stackColors: Record<string, string> = {
   React: "#61dafb",
-  "Next.js": "#ffffff",
+  "Next.js": "#888888",
   TypeScript: "#3178c6",
   "Node.js": "#68a063",
   PostgreSQL: "#336791",

@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "@/components/ThemeProvider";
 
+const MY_LOGO = "<MUBARAK />"
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
@@ -34,6 +37,7 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const navRef = useRef<HTMLElement>(null);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     if (!navRef.current) return;
@@ -80,9 +84,8 @@ export default function Navigation() {
       <nav
         ref={navRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "py-3 border-b border-white/5 backdrop-blur-xl" : "py-6"
+          scrolled ? "py-3 border-b border-border/40 backdrop-blur-xl bg-background/90" : "py-6"
         }`}
-        style={scrolled ? { backgroundColor: "rgba(12,22,39,0.85)" } : {}}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <button
@@ -91,9 +94,9 @@ export default function Navigation() {
             className="group flex items-center gap-2 focus:outline-none"
           >
             <span className="text-sm font-mono font-bold tracking-widest text-[#ff6600] group-hover:opacity-75 transition-opacity">
-              MUBARAK
+              {/* MUBARAK */}{MY_LOGO}
             </span>
-            <span className="w-1 h-1 rounded-full bg-[#ff6600]" />
+            {/* <span className="w-1 h-1 rounded-full bg-[#ff6600]" /> */}
           </button>
 
           <ul className="hidden md:flex items-center gap-7">
@@ -128,6 +131,16 @@ export default function Navigation() {
                 <Icon size={15} />
               </a>
             ))}
+            
+            {/* Theme Toggle Button */}
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="text-foreground/30 hover:text-[#ff6600] transition-colors ml-4 focus:outline-none"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+
             <a
               href="#contact"
               onClick={(e) => {
@@ -170,8 +183,7 @@ export default function Navigation() {
             animate={{ clipPath: "circle(150% at calc(100% - 2.5rem) 2.5rem)" }}
             exit={{ clipPath: "circle(0% at calc(100% - 2.5rem) 2.5rem)" }}
             transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-40 flex flex-col justify-center items-center"
-            style={{ backgroundColor: "#0a1628" }}
+            className="fixed inset-0 z-40 flex flex-col justify-center items-center bg-background"
           >
             <nav className="flex flex-col items-center gap-8">
               {navLinks.map((link, i) => (
@@ -209,6 +221,15 @@ export default function Navigation() {
                   <Icon size={20} />
                 </a>
               ))}
+
+              {/* Mobile Theme Toggle */}
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="text-foreground/30 hover:text-[#ff6600] transition-colors focus:outline-none ml-2"
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
             </motion.div>
           </motion.div>
         )}

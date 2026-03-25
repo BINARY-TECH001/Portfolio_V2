@@ -46,8 +46,8 @@ function PreviewPane({ project }: { project: typeof projects[0] }) {
       className="flex flex-col h-full"
     >
       {/* Real image preview - Scrollable container for tall images */}
-      <div className="flex-1 rounded-sm overflow-hidden relative group/pane border border-white/5 bg-black/40">
-        <div className="w-full h-full overflow-y-auto custom-scrollbar-hide bg-[#0c1627]">
+      <div className="flex-1 rounded-sm overflow-hidden relative group/pane border border-foreground/5 bg-black/40">
+        <div className="w-full h-full overflow-y-auto custom-scrollbar-hide bg-background">
           <img
             src={project.visual}
             alt={project.title}
@@ -67,7 +67,7 @@ function PreviewPane({ project }: { project: typeof projects[0] }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-[#ff6600] transition-colors"
+                className="w-10 h-10 rounded-full bg-foreground/10 backdrop-blur-md flex items-center justify-center text-foreground hover:bg-[#ff6600] hover:text-white transition-colors"
                 title="Visit Live Site"
               >
                 <ArrowUpRight size={18} />
@@ -79,7 +79,7 @@ function PreviewPane({ project }: { project: typeof projects[0] }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+                className="w-10 h-10 rounded-full bg-foreground/10 backdrop-blur-md flex items-center justify-center text-foreground hover:bg-foreground hover:text-background transition-colors"
                 title="View Source on GitHub"
               >
                 <FaGithub size={18} />
@@ -88,7 +88,7 @@ function PreviewPane({ project }: { project: typeof projects[0] }) {
           </div>
           <button
             onClick={() => navigate(`/projects/${project.slug}`)}
-            className="w-full py-3 bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-[#ff6600] hover:text-white transition-colors rounded-sm shadow-xl"
+            className="w-full py-3 bg-foreground text-background text-xs font-bold uppercase tracking-widest hover:bg-[#ff6600] hover:text-white transition-colors rounded-sm shadow-xl"
           >
             Explore Case Study
           </button>
@@ -102,8 +102,8 @@ function PreviewPane({ project }: { project: typeof projects[0] }) {
             key={tech}
             className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 border rounded-sm"
             style={{
-              borderColor: `${stackColors[tech] || "#fff"}20`,
-              color: `${stackColors[tech] || "#fff"}70`,
+              borderColor: stackColors[tech] === "#ffffff" ? "hsl(var(--foreground))" : `${stackColors[tech] || "#fff"}20`,
+              color: stackColors[tech] === "#ffffff" ? "hsl(var(--foreground))" : `${stackColors[tech] || "#fff"}90`,
             }}
           >
             {tech}
@@ -148,7 +148,7 @@ export default function Projects() {
               target="_blank"
               rel="noopener noreferrer"
               data-testid="link-all-projects"
-              className="flex items-center gap-2 text-xs font-medium text-foreground/40 hover:text-foreground/70 transition-colors border-b border-white/10 hover:border-white/30 pb-0.5 whitespace-nowrap"
+              className="flex items-center gap-2 text-xs font-medium text-foreground/40 hover:text-foreground/80 transition-colors border-b border-foreground/10 hover:border-foreground/30 pb-0.5 whitespace-nowrap"
             >
               <FaGithub size={13} />
               All repositories
@@ -161,7 +161,7 @@ export default function Projects() {
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_380px] gap-8 mb-28">
 
           {/* Left: numbered list */}
-          <div className="border-t border-white/8">
+          <div className="border-t border-border/40">
             {projects.map((project, i) => (
               <motion.div
                 key={project.id}
@@ -172,14 +172,14 @@ export default function Projects() {
                 onMouseLeave={() => setHoveredId(null)}
                 onClick={() => navigate(`/projects/${project.slug}`)}
                 data-testid={`card-project-${project.id}`}
-                className="group border-b border-white/8 cursor-pointer"
+                className="group border-b border-border/40 cursor-pointer"
               >
                 <div className="py-8 flex items-center gap-6 md:gap-10">
 
                   {/* Number */}
                   <span
-                    className="text-4xl md:text-5xl font-bold font-mono shrink-0 transition-colors duration-300 select-none"
-                    style={{ color: hoveredId === project.id ? "#ff6600" : "rgba(255,255,255,0.06)" }}
+                    className="text-4xl md:text-5xl font-bold font-mono shrink-0 transition-colors duration-300 select-none opacity-20 group-hover:opacity-100"
+                    style={{ color: hoveredId === project.id ? "#ff6600" : "hsl(var(--foreground))" }}
                   >
                     {project.index}
                   </span>
@@ -187,7 +187,7 @@ export default function Projects() {
                   {/* Title + meta */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline gap-3 flex-wrap mb-2">
-                      <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-white transition-colors duration-200">
+                      <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-foreground transition-colors duration-200">
                         {project.title}
                       </h3>
                       <span className="text-xs font-mono text-foreground/25 hidden sm:block">
@@ -208,8 +208,8 @@ export default function Projects() {
                           key={tech}
                           className="text-xs font-mono px-2 py-0.5 border rounded-sm"
                           style={{
-                            borderColor: `${stackColors[tech] || "#fff"}20`,
-                            color: `${stackColors[tech] || "#fff"}60`,
+                            borderColor: stackColors[tech] === "#ffffff" ? "hsl(var(--foreground))" : `${stackColors[tech] || "#fff"}20`,
+                            color: stackColors[tech] === "#ffffff" ? "hsl(var(--foreground))" : `${stackColors[tech] || "#fff"}90`,
                           }}
                         >
                           {tech}
@@ -238,9 +238,7 @@ export default function Projects() {
 
           {/* Right: sticky hover preview */}
           <div className="hidden xl:block">
-            <div className="sticky top-32 h-[420px] border border-white/8 rounded-sm p-5 overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.01)" }}
-            >
+            <div className="sticky top-32 h-[420px] border border-foreground/10 rounded-sm p-5 overflow-hidden bg-foreground/2">
               <AnimatePresence mode="wait">
                 {hoveredProject ? (
                   <PreviewPane key={hoveredProject.id} project={hoveredProject} />
@@ -253,8 +251,7 @@ export default function Projects() {
                     className="h-full flex flex-col items-center justify-center gap-3"
                   >
                     <div
-                      className="w-12 h-12 rounded-sm border border-white/8 flex items-center justify-center"
-                      style={{ background: "rgba(255,102,0,0.05)" }}
+                      className="w-12 h-12 rounded-sm border border-border/40 flex items-center justify-center bg-[#ff6600]/5"
                     >
                       <ArrowRight size={16} className="text-[#ff6600]/30" />
                     </div>
@@ -277,10 +274,10 @@ export default function Projects() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center gap-4 mb-10">
-              <span className="text-xs font-semibold tracking-[0.2em] uppercase text-foreground/30">
+              <span className="text-xs font-semibold tracking-[0.2em] uppercase text-foreground/50">
                 Other Notable Work
               </span>
-              <div className="flex-1 h-px bg-white/5" />
+              <div className="flex-1 h-px bg-border/40" />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -296,14 +293,14 @@ export default function Projects() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08, duration: 0.5 }}
                   whileHover={{ y: -4, transition: { duration: 0.18 } }}
-                  className="group flex flex-col justify-between p-5 border border-white/8 rounded-sm hover:border-[#ff6600]/30 transition-all duration-300"
+                  className="group flex flex-col justify-between p-5 border border-border/40 rounded-sm hover:border-[#ff6600]/30 transition-all duration-300"
                 >
                   <div>
                     <div className="flex items-start justify-between mb-3">
-                      <FaGithub size={16} className="text-foreground/30 group-hover:text-foreground/60 transition-colors" />
-                      <ArrowUpRight size={14} className="text-foreground/20 group-hover:text-[#ff6600] transition-colors" />
+                      <FaGithub size={16} className="text-foreground/40 group-hover:text-foreground/70 transition-colors" />
+                      <ArrowUpRight size={14} className="text-foreground/30 group-hover:text-[#ff6600] transition-colors" />
                     </div>
-                    <h4 className="text-sm font-semibold text-foreground group-hover:text-white transition-colors mb-2">
+                    <h4 className="text-sm font-semibold text-foreground transition-colors mb-2">
                       {project.title}
                     </h4>
                     <p className="text-xs text-foreground/45 leading-relaxed">{project.desc}</p>
