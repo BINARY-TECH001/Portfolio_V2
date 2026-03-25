@@ -12,6 +12,7 @@ import Projects from "@/components/Projects";
 import TechStack from "@/components/TechStack";
 import GitHub from "@/components/GitHub";
 import Contact from "@/components/Contact";
+import ProjectDetail from "@/pages/ProjectDetail";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -51,6 +52,7 @@ function Portfolio() {
 function Router() {
   return (
     <Switch>
+      <Route path="/projects/:slug" component={ProjectDetail} />
       <Route path="/" component={Portfolio} />
       <Route component={Portfolio} />
     </Switch>
