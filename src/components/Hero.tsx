@@ -66,11 +66,15 @@ export default function Hero() {
     >
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Portrait Background */}
-        <div 
-          className="absolute inset-0 bg-[url('/assets/binary2-nobg.png')] bg-[length:120%] md:bg-cover bg-top md:bg-center bg-no-repeat opacity-[0.06] dark:opacity-[0.03] mix-blend-luminosity grayscale"
-        />
+        <div className="absolute inset-x-0 bottom-0 top-[10vh] md:top-[12vh] flex items-end justify-center">
+          <img 
+            src="/assets/binary2-nobg.png" 
+            alt="Mubarak" 
+            className="h-full w-auto object-contain opacity-[0.15] dark:opacity-10 mix-blend-luminosity grayscale translate-y-[2%]"
+          />
+        </div>
         {/* Color overlay to fade it beautifully into background */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none" />
 
         <div
           className="absolute right-[-10%] top-1/3 w-[700px] h-[700px] rounded-full"
