@@ -64,14 +64,21 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 overflow-hidden"
     >
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Portrait Background */}
+        <div 
+          className="absolute inset-0 bg-[url('/assets/binary2-nobg.png')] bg-[length:120%] md:bg-cover bg-top md:bg-center bg-no-repeat opacity-[0.06] dark:opacity-[0.03] mix-blend-luminosity grayscale"
+        />
+        {/* Color overlay to fade it beautifully into background */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/50" />
+
         <div
           className="absolute right-[-10%] top-1/3 w-[700px] h-[700px] rounded-full"
-          style={{ background: "#ff6600", filter: "blur(160px)", opacity: 0.025 }}
+          style={{ background: "#ff6600", filter: "blur(160px)", opacity: 0.03 }}
         />
-        <div className="absolute left-0 top-0 w-full h-full opacity-[0.015]"
+        <div className="absolute left-0 top-0 w-full h-full opacity-10"
           style={{
-            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, currentColor 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
@@ -108,8 +115,8 @@ export default function Hero() {
             <div className="overflow-visible mb-2">
               <motion.h1
                 variants={item}
-                className="font-bold leading-[0.95] tracking-tight"
-                style={{ fontSize: "clamp(2.8rem, 8vw, 7rem)", color: "rgba(255,255,255,0.4)" }}
+                className="font-bold leading-[0.95] tracking-tight text-foreground/40"
+                style={{ fontSize: "clamp(2.8rem, 8vw, 7rem)" }}
               >
                 Mubarak
               </motion.h1>
@@ -117,8 +124,8 @@ export default function Hero() {
             <div className="overflow-visible mb-10">
               <motion.h1
                 variants={item}
-                className="font-bold leading-[0.95] tracking-tight"
-                style={{ fontSize: "clamp(2.8rem, 8vw, 7rem)", color: "rgba(255,255,255,0.2)" }}
+                className="font-bold leading-[0.95] tracking-tight text-foreground/20"
+                style={{ fontSize: "clamp(2.8rem, 8vw, 7rem)" }}
               >
                 Ishola
               </motion.h1>
@@ -148,7 +155,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="link-hero-github"
-                className="flex items-center gap-2 px-8 py-3.5 border border-white/15 text-foreground/60 text-sm font-medium hover:border-white/30 hover:text-foreground transition-all duration-300 rounded-sm"
+                className="flex items-center gap-2 px-8 py-3.5 border border-border/60 text-foreground/80 text-sm font-medium hover:border-foreground/30 hover:text-foreground transition-all duration-300 rounded-sm"
               >
                 <FaGithub size={15} />
                 GitHub
@@ -160,8 +167,8 @@ export default function Hero() {
             variants={item}
             className="hidden lg:flex flex-col justify-end gap-6 pb-4"
           >
-            <div className="p-5 border border-white/6 rounded-sm">
-              <div className="text-xs font-mono text-foreground/25 mb-3 tracking-wider">Current Stack</div>
+            <div className="p-5 border border-border/40 rounded-sm">
+              <div className="text-xs font-mono text-foreground/50 mb-3 tracking-wider">Current Stack</div>
               <div className="space-y-1.5 font-mono text-xs">
                 {[
                   { color: "#61dafb", text: "React, NextJs, React Native + TypeScript" },
@@ -177,8 +184,8 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="p-5 border border-white/6 rounded-sm">
-              <div className="text-xs font-mono text-foreground/25 mb-3 tracking-wider">At a glance</div>
+            <div className="p-5 border border-border/40 rounded-sm">
+              <div className="text-xs font-mono text-foreground/50 mb-3 tracking-wider">At a glance</div>
               <div className="space-y-2">
                 {[
                   { v: "5+", l: "Years experience" },
